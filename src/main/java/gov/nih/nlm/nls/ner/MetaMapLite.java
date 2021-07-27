@@ -29,6 +29,7 @@ import java.util.HashSet;
 
 import java.lang.reflect.InvocationTargetException;
 
+import gov.nih.nlm.nls.metamap.lite.resultformats.*;
 import gov.nih.nlm.nls.utils.StringUtils;
 import gov.nih.nlm.nls.metamap.lite.pipeline.plugins.Plugin;
 import gov.nih.nlm.nls.metamap.lite.pipeline.plugins.PluginRegistry;
@@ -48,10 +49,6 @@ import gov.nih.nlm.nls.metamap.lite.SemanticGroupFilter;
 import gov.nih.nlm.nls.metamap.lite.SemanticGroups;
 import gov.nih.nlm.nls.metamap.lite.EntityAnnotation;
 import gov.nih.nlm.nls.metamap.lite.resultformats.mmi.MMI;
-import gov.nih.nlm.nls.metamap.lite.resultformats.Brat;
-import gov.nih.nlm.nls.metamap.lite.resultformats.CuiList;
-import gov.nih.nlm.nls.metamap.lite.resultformats.BcEvaluate;
-import gov.nih.nlm.nls.metamap.lite.resultformats.FullJson;
 import gov.nih.nlm.nls.metamap.lite.BioCUtilities;
 import gov.nih.nlm.nls.metamap.lite.Phrase;
 import gov.nih.nlm.nls.metamap.lite.OpenNLPChunker;
@@ -71,9 +68,6 @@ import gov.nih.nlm.nls.metamap.document.SemEvalDocument;
 import gov.nih.nlm.nls.metamap.document.PubMedXMLDocument;
 import gov.nih.nlm.nls.metamap.document.PubTator;
 import gov.nih.nlm.nls.metamap.document.MedlineDocument;
-
-import gov.nih.nlm.nls.metamap.lite.resultformats.ResultFormatter;
-import gov.nih.nlm.nls.metamap.lite.resultformats.ResultFormatterRegistry;
 
 import gov.nih.nlm.nls.metamap.lite.dictionary.AugmentedDictionary;
 
@@ -207,6 +201,7 @@ public class MetaMapLite {
     outputExtensionMap.put("cdi",".cdi");
     outputExtensionMap.put("cuilist",".cuis");
     outputExtensionMap.put("json",".json");
+    outputExtensionMap.put("mmijson",".mmi.json");
   }
 
   Set<String> semanticGroup = new HashSet<String>(); // initially empty
@@ -310,6 +305,9 @@ public class MetaMapLite {
     ResultFormatterRegistry.register("fulljson",
 				     "JSON format (.json)",
 				     new FullJson());
+    ResultFormatterRegistry.register("mmijson",
+				     "JSON format (.json)",
+				     new MmiJson());
     ResultFormatterRegistry.register("mmi",
 				     "Fielded MetaMap Indexing-like Output",
 				     new MMI());

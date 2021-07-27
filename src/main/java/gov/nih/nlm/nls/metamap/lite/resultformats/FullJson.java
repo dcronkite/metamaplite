@@ -48,6 +48,7 @@ public class FullJson implements ResultFormatter {
     jsonObj.put("score", ev.getScore());
     jsonObj.put("start", ev.getStart());
     jsonObj.put("length", ev.getLength());
+    jsonObj.put("pos", ev.getPartOfSpeech());
     JSONObject conceptInfoJsonObj = conceptInfoToJson(ev.getConceptInfo());
     jsonObj.put("conceptinfo", conceptInfoJsonObj);
     return jsonObj;
